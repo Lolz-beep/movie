@@ -2,8 +2,8 @@ import axios from 'axios';
 import type { Movie, TVShow, MovieDetails, TVDetails, TMDBResponse, SearchResult, Video } from '@/types';
 
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL;
-const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL || 'https://api.themoviedb.org/3';
+const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL || 'https://image.tmdb.org/t/p';
 
 const tmdbClient = axios.create({
     baseURL: BASE_URL,
