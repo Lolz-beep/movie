@@ -5,6 +5,14 @@ const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL || 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL || 'https://image.tmdb.org/t/p';
 
+// Validate that API_KEY is set
+if (!API_KEY) {
+    throw new Error(
+        'NEXT_PUBLIC_TMDB_API_KEY is not set. Please add it to your environment variables.\n' +
+        'Get your API key from: https://www.themoviedb.org/settings/api'
+    );
+}
+
 const tmdbClient = axios.create({
     baseURL: BASE_URL,
     params: {
