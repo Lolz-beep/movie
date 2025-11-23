@@ -5,11 +5,38 @@ const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL || 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL || 'https://image.tmdb.org/t/p';
 
+// Debug logging for environment variables (only in development or during build)
+if (process.env.NODE_ENV !== 'production') {
+    console.log('TMDB Configuration:', {
+        hasApiKey: !!API_KEY,
+        baseUrl: BASE_URL,
+        imageBaseUrl: IMAGE_BASE_URL,
+    });
+}
+
 // Validate that API_KEY is set
 if (!API_KEY) {
+    const errorMessage = [
+        '❌ NEXT_PUBLIC_TMDB_API_KEY is not set!',
+        '',
+        'To fix this:',
+        '1. Get your API key from: https://www.themoviedb.org/settings/api',
+        '2. In Vercel: Settings → Environment Variables → Add New',
+        '3. Name: NEXT_PUBLIC_TMDB_API_KEY',
+        '4. Value: [your API key]',
+        '5. Redeploy your application',
+        '',
+        'For local development, add it to .env.local file',
+    ].join('\n');
+
+    throw new Error(errorMessage);
+}
+
+// Validate that BASE_URL is a valid URL
+if (!BASE_URL || !BASE_URL.startsWith('http')) {
     throw new Error(
-        'NEXT_PUBLIC_TMDB_API_KEY is not set. Please add it to your environment variables.\n' +
-        'Get your API key from: https://www.themoviedb.org/settings/api'
+        `Invalid TMDB BASE_URL: "${BASE_URL}"\n` +
+        'Expected a full URL like: https://api.themoviedb.org/3'
     );
 }
 
