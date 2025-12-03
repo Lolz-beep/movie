@@ -17,26 +17,35 @@ export default function MediaRow({ title, items, mediaType }: MediaRowProps) {
     const scroll = (direction: 'left' | 'right') => {
         if (scrollContainerRef.current) {
             const scrollAmount = 400;
-            const newScrollLeft =
-                direction === 'left'
-                    ? scrollContainerRef.current.scrollLeft - scrollAmount
-                    : scrollContainerRef.current.scrollLeft + scrollAmount;
-
-            scrollContainerRef.current.scrollTo({
-                left: newScrollLeft,
+            scrollContainerRef.current.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
                 behavior: 'smooth',
             });
         }
     };
 
+    // Get icon based on title
+    const getIcon = () => {
+        if (title.toLowerCase().includes('trending')) return '🔥';
+        if (title.toLowerCase().includes('top rated')) return '⭐';
+        if (title.toLowerCase().includes('popular')) return '📈';
+        return '🎬';
+    };
+
     if (!items || items.length === 0) return null;
 
     return (
-        <div className="space-y-4 mb-8">
-            {/* Title */}
-            <h2 className="text-2xl font-bold text-foreground px-4 sm:px-6 lg:px-8">
-                {title}
-            </h2>
+        <div className="relative px-4 sm:px-6 lg:px-8">
+            {/* Section Header */}
+            <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl md:text-2xl font-bold text-foreground flex items-center space-x-2">
+                    <span>{getIcon()}</span>
+                    <span>{title}</span>
+                </h2>
+                <button className="text-accent-primary hover:text-accent-secondary text-sm font-medium transition-colors">
+                    View All →
+                </button>
+            </div>
 
             {/* Scrollable Container */}
             <div className="relative group">
@@ -61,7 +70,7 @@ export default function MediaRow({ title, items, mediaType }: MediaRowProps) {
                 {/* Cards Container */}
                 <div
                     ref={scrollContainerRef}
-                    className="flex overflow-x-auto scrollbar-hide space-x-4 px-4 sm:px-6 lg:px-8 pb-4"
+                    className="flex overflow-x-auto scrollbar-hide space-x-4 pb-4"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
                     {items.map((item) => (

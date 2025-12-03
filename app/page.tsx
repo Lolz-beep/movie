@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero';
 import MediaRow from '@/components/MediaRow';
+import CategoryFilter from '@/components/CategoryFilter';
 import { getTrending, getPopularMovies, getPopularTVShows, getTopRatedMovies } from '@/lib/tmdb';
 
 export default async function Home() {
@@ -20,8 +21,11 @@ export default async function Home() {
       {/* Hero Section */}
       <Hero media={featuredMedia} mediaType={featuredType} />
 
+      {/* Category Filter */}
+      <CategoryFilter />
+
       {/* Content Rows */}
-      <div className="space-y-8 py-8">
+      <div className="space-y-10 py-8 pb-16">
         <MediaRow
           title="Trending Now"
           items={trendingData.results.slice(1, 11)}

@@ -69,14 +69,14 @@ export default function Hero({ media, mediaType }: HeroProps) {
                     <div className="flex items-center space-x-4">
                         <Link
                             href={`/watch/${mediaType}/${media.id}`}
-                            className="flex items-center space-x-2 px-6 py-3 bg-accent-primary hover:bg-accent-secondary text-white rounded-full font-semibold transition-all transform hover:scale-105"
+                            className="flex items-center space-x-2 px-8 py-3 bg-accent-gradient hover:shadow-lg hover:shadow-accent-primary/30 text-white rounded-full font-semibold transition-all transform hover:scale-105"
                         >
                             <FiPlay size={20} />
                             <span>Play Now</span>
                         </Link>
                         <Link
                             href={`/${mediaType}/${media.id}`}
-                            className="flex items-center space-x-2 px-6 py-3 glass hover:bg-background-tertiary text-foreground rounded-full font-semibold transition-all"
+                            className="flex items-center space-x-2 px-8 py-3 glass hover:bg-background-tertiary text-foreground rounded-full font-semibold transition-all hover:border-accent-primary"
                         >
                             <FiInfo size={20} />
                             <span>More Info</span>

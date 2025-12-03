@@ -30,14 +30,17 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass shadow-lg' : 'bg-transparent'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass shadow-lg' : 'bg-gradient-to-b from-black/80 to-transparent'
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center space-x-2">
-                        <span className="text-2xl font-bold gradient-text">CineBy</span>
+                    <Link href="/" className="flex items-center space-x-2 group">
+                        <div className="w-8 h-8 bg-accent-gradient rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <span className="text-white font-bold text-lg">C</span>
+                        </div>
+                        <span className="text-xl font-bold gradient-text">CineBy</span>
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -70,9 +73,9 @@ export default function Navbar() {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search movies, TV shows..."
-                                className="w-64 px-4 py-2 pl-10 bg-background-secondary border border-border-color rounded-full text-sm focus:outline-none focus:border-accent-primary transition-colors"
+                                className="w-64 px-4 py-2 pl-10 bg-background-secondary border border-border-color rounded-full text-sm text-foreground placeholder-foreground-tertiary focus:outline-none focus:border-accent-primary focus:ring-2 focus:ring-accent-primary/20 transition-all"
                             />
-                            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground-secondary" />
+                            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground-tertiary" />
                         </form>
                     </div>
 
